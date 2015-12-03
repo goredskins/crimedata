@@ -60,6 +60,9 @@
                     <li>
                         <a href="#"><i class="fa fa-fw fa-table"></i>Report Crime</a>
                     </li>
+                    <li>
+                        <a href="map.php"><i class="fa fa-fw fa-table"></i>Maps</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
