@@ -51,13 +51,16 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+                        <a href="charts.php"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
                     </li>
                     <li>
-                        <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
+                        <a href="tables.php"><i class="fa fa-fw fa-table"></i> Tables</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-fw fa-table"></i>Report Crime</a>
                     </li>
                 </ul>
             </div>
@@ -83,6 +86,21 @@
                 </div>
                 <!-- /.row -->
 
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Test getting some data...</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div id = "table_content"> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
@@ -95,8 +113,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.row -->
-
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="panel panel-default">
@@ -202,12 +218,27 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
+    <script>
+        function loadTable() {
+            $.ajax({
+                type : 'post',
+                url : 'loadTable.php',  
+                data :  {
+                    'table_name': 'crimes',
+                },
+                success : function(r) {
+                    $("#table_content").html(r);
+                }
+            });
+        }
+        $(function(){
+            loadTable();
+        });
+    </script>
     <!-- Morris Charts JavaScript -->
     <script src="js/plugins/morris/raphael.min.js"></script>
     <script src="js/plugins/morris/morris.min.js"></script>
     <script src="js/plugins/morris/morris-data.js"></script>
-
 </body>
 
 </html>
