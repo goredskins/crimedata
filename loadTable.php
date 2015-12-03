@@ -7,7 +7,7 @@ if(isset($_POST['certain_cols'])) {
 $table = $_POST['table_name'];
 $res = $mysqli->query("SELECT * FROM $table LIMIT 1");
 ?>
-<table class="table table-hover" id="the_table">
+<table class="table table-hover table-bordered table-striped" id="the_table">
 <?php
 print("<tr>");
 $column_count = 0;
@@ -28,7 +28,7 @@ while ($property = mysqli_fetch_field($res)) {
 }
 print("</tr>\n");
 
-$res = $mysqli->query("SELECT * FROM $table LIMIT 25");
+$res = $mysqli->query("SELECT * FROM $table LIMIT 10");
 $res->data_seek(0);
 while ($row = $res->fetch_assoc()) {
 	echo "<tr>";
