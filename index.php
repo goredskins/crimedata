@@ -1,3 +1,14 @@
+<?php
+// Check if session is not registered, redirect back to main page. 
+// Put this code in first line of web page. 
+session_start();
+if(!isset($_SESSION['username'])) {
+    header("location:login.php");
+}
+else {
+    $username = $_SESSION['username'];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +20,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>NYC Crime Data Dashboard</title>
+    <title>Baltimore Crime Data</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -45,7 +56,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">NYC Crime Data</a>
+                <a class="navbar-brand" href="index.html">Baltimore Crime Data</a>
             </div>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
