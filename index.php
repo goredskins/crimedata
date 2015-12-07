@@ -63,7 +63,10 @@
                         <a href="#"><i class="fa fa-fw fa-table"></i>Report Crime</a>
                     </li>
                     <li>
-                        <a href="map.php"><i class="fa fa-fw fa-table"></i>Maps</a>
+                        <a href="map.php"><i class="fa fa-fw fa-table"></i>Map of Crimes by Date</a>
+                    </li>
+                    <li>
+                        <a href="heatmap.php"><i class="fa fa-fw fa-table"></i>Heat Map</a>
                     </li>
                 </ul>
             </div>

@@ -1,6 +1,10 @@
 <?php
 include("connect.php");
-$res = $mysqli->query("SELECT latitude, longitude FROM crimes LIMIT 50");
+$limit = 500;
+if(isset($_POST['limit'])) {
+	$limit = $_POST['limit'];
+}
+$res = $mysqli->query("SELECT latitude, longitude FROM crimes WHERE latitude IS NOT NULL AND longitude IS NOT NULL LIMIT $limit");
 $res->data_seek(0);
 //echo json_encode($res->fetch_assoc());
 $rows = array();
