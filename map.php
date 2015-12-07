@@ -100,6 +100,22 @@
                             </div>
                             <div class="panel-body">
                                  <div id="map-canvas"></div>
+                                 <div id="latlong"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Heat Map </h3>
+                            </div>
+                            <div class="panel-body">
+                                 <div id="heat-map"></div>
+                                 <div id="latlong-heat"></div>
                             </div>
                         </div>
                     </div>
@@ -121,22 +137,57 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaI6XGo6lIsbV2FdQECz68XPjlOTUBA3I&amp;sensor=true"> </script>
     <script type="text/javascript">
 		function initialize() {
-		            var mapOptions = {
-		                center: new google.maps.LatLng(28.1823294, -82.352912),
-		                zoom: 9,
-		                scrollwheel: false,
-		                draggable: true,
-		                panControl: true,
-		                zoomControl: true,
-		                mapTypeControl: true,
-		                scaleControl: true,
-		                streetViewControl: true,
-		                overviewMapControl: true,
-		                rotateControl: true,
-		            };
-		var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-		        }
+	        var mapOptions = {
+	            center: new google.maps.LatLng(39.2959200000, -76.579310000),
+	            zoom: 13,
+	            scrollwheel: false,
+	            draggable: true,
+	            panControl: true,
+	            zoomControl: true,
+	            mapTypeControl: true,
+	            scaleControl: true,
+	            streetViewControl: true,
+	            overviewMapControl: true,
+	            rotateControl: true,
+	        };
+			var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+		  	getCoordinates(map);
+
+		  	var myLatLng = {lat: 39.2959200000, lng: -76.5793100000};
+		  	var myLatLng2 = {lat: 39.3135100000, lng: -76.5987200000};
+		  	var image = 'images/crime.png';
+		}
+
+		function getCoordinates(map) {
+			$.ajax({
+                type : 'post',
+                url : 'coordinates.php',  
+                data :  {},
+                success : function(r) {
+                    //$("#latlong").html(r);
+                    var obj = JSON.parse(r);
+                    console.debug(obj);
+                    for(var key in obj) {
+                    	var image = {
+                    		url: 'images/crime.png',
+                    		// size: new google.maps.Size(20, 20),
+                    		// origin: new google.maps.Point(0, 0)
+                    	};
+                    	var myLatLng = {lat: parseFloat(obj[key]['latitude']), lng: parseFloat(obj[key]['longitude'])}
+					  	var marker = new google.maps.Marker({
+						    position: myLatLng,
+						    map: map,
+						    icon: image,
+						    title: 'Hello World!',
+						    animation: google.maps.Animation.DROP,
+					  	});
+                    }
+                }
+            });
+		}
+
 		google.maps.event.addDomListener(window, 'load', initialize);
+
     </script>
 </body>
 
