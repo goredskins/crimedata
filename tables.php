@@ -104,7 +104,7 @@ else {
 
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2>Bordered Table</h2>
+                        <h2>Highest Crime Rates by Neighborhood</h2>
                         <div id="the-table">
                         </div>
                     </div>

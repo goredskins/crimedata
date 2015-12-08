@@ -176,7 +176,8 @@ else {
                 	var dateTypeVar = $('#datepicker').datepicker('getDate');
 					var dateString = $.datepicker.formatDate('yy-mm-dd', dateTypeVar);
 					getCoordinates(map, dateString);
-              }
+              },
+              defaultDate: '11/07/2015'
             });
 
             $.ajax({
@@ -259,11 +260,14 @@ else {
             });
 		}
 
-		function getCoordinates(map, dateString) {
+		function getCoordinates(map, dateStr) {
 			$(".page-header").html("Map of Crimes on " + dateString);
 			deleteMarkers();
 			var dateTypeVar = $('#datepicker').datepicker('getDate');
 			var dateString = $.datepicker.formatDate('yy-mm-dd', dateTypeVar);
+			if(dateString.length < 1) {
+				dateString = dateStr;
+			}
 			$.ajax({
                 type : 'post',
                 url : 'coordinates.php',  

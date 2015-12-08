@@ -6,10 +6,10 @@ if(isset($_POST['certain_cols'])) {
 }
 $table = $_POST['table_name'];
 $query_string_cols = "SELECT * from $table LIMIT 1";
-$query_string = "SELECT * FROM $table LIMIT 10";
+$query_string = "SELECT * FROM $table LIMIT 20";
 if(isset($_POST['query'])) {
     $query_string_cols = $_POST['query']. " LIMIT 1";
-    echo $query_string_cols;
+    //echo $query_string_cols;
     $query_string = $_POST['query'];
 }
 $res = $mysqli->query($query_string_cols);
@@ -20,22 +20,21 @@ print("<tr>");
 $column_count = 0;
 $actual_field_names = array();
 while ($property = mysqli_fetch_field($res)) {
+    $column_count++;
     $field_name = $property->name;
-    if($certain_cols) {
-        if(!in_array($column_num, $colNums)) {
-            continue;
-        }
+    //echo $column_count;
+    if($field_name=='id') {
+        continue;
     }
     $actual_field_names[] = $field_name;
     if(isset($column_naming[$field_name])) {
         $field_name = $column_naming[$field_name];
     }
     print("<th>$field_name</th>");
-    $column_count++;
 }
 print("</tr>\n");
 if($table == "crimes") {
-    $query_string = "SELECT * FROM $table ORDER BY date_time DESC LIMIT 10";
+    $query_string = "SELECT * FROM $table ORDER BY date_time DESC LIMIT 20";
 }
 $res = $mysqli->query($query_string);
 $res->data_seek(0);

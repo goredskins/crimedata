@@ -100,11 +100,12 @@ else {
                         <h1 class="page-header">
                             Dashboard <small>Statistics Overview</small>
                         </h1>
-                        <ol class="breadcrumb">
-                            <li class="active">
-                                <i class="fa fa-dashboard"></i> Dashboard
-                            </li>
-                        </ol>
+                        <ul class="nav nav-pills">
+                          <li role="presentation" id="crimes_link"><a href="#">Recent Crimes</a></li>
+                          <li role="presentation" id="homeless_link"><a href="#">Homeless Shelters</a></li>
+                          <li role="presentation" id="courthouse_link"><a href="#">Courthouses</a></li>
+                        <li role="presentation" id="hospital_link"><a href="#">Hospitals</a></li>
+                        </ul>
                     </div>
                 </div>
                 <!-- /.row -->
@@ -113,26 +114,9 @@ else {
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Crimes </h3>
-                            </div>
                             <div class="panel-body">
                                 <div class="row">
-                                    <div id = "crime_content"> </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Homeless Shelters</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div id = "homeless_content"> </div>
+                                    <div id = "table_content"> </div>
                                 </div>
                             </div>
                         </div>
@@ -153,7 +137,7 @@ else {
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
     <script>
-        function loadTable() {
+        function loadCrimes() {
             $.ajax({
                 type : 'post',
                 url : 'loadTable.php',  
@@ -161,9 +145,11 @@ else {
                     'table_name': 'crimes',
                 },
                 success : function(r) {
-                    $("#crime_content").html(r);
+                    $("#table_content").html(r);
                 }
             });
+        }
+        function loadHomelessShelters() {
             $.ajax({
                 type : 'post',
                 url : 'loadTable.php',  
@@ -171,12 +157,48 @@ else {
                     'table_name': 'homeless_shelters',
                 },
                 success : function(r) {
-                    $("#homeless_content").html(r);
+                    $("#table_content").html(r);
+                }
+            });
+        }
+        function loadHospitals() {
+            $.ajax({
+                type : 'post',
+                url : 'loadTable.php',  
+                data :  {
+                    'table_name': 'hospitals',
+                },
+                success : function(r) {
+                    $("#table_content").html(r);
+                }
+            });
+        }
+        function loadCourthouses() {
+            $.ajax({
+                type : 'post',
+                url : 'loadTable.php',  
+                data :  {
+                    'table_name': 'courthouses',
+                },
+                success : function(r) {
+                    $("#table_content").html(r);
                 }
             });
         }
         $(function(){
-            loadTable();
+            loadCrimes();
+            $('#crimes_link').click( function() { 
+                loadCrimes();
+            });
+            $('#homeless_link').click( function() { 
+                loadHomelessShelters();
+            });
+            $('#hospital_link').click( function() { 
+                loadHospitals();
+            });
+            $('#courthouse_link').click( function() { 
+                loadCourthouses();
+            });
         });
     </script>
     <!-- Morris Charts JavaScript -->

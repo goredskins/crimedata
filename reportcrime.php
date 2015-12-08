@@ -121,14 +121,14 @@ else {
                                  <div id="form-content">
                                     <form action = "addcrime.php" method = "post"><br>
                                     Date: <input type = "text" name = "date" value = "2015-12-08"/><br>
-                                    Crime Code: <input type = "text" name="crime_code" value = "1F"/><br>
-                                    Location: <input type = "text" name="location"/><br>
-                                    Weapon: <input type = "text" name = "weapon"/><br>
-                                    Post: <input type = "text" name = "post"/><br>
-                                    Neighborhood: <input type = "text" name = "neighborhood"/><br>
-                                    District: <input type = "text" name = "district"/><br>
-                                    Lat: <input type = "text" name ="latitude" value = "39.3107200000"/><br>
-                                    Long: <input type = "text" name ="longitude" value = "-76.708240000"/><br>
+                                    Crime Code: <input type = "text" name="crime_code" value = "3AK"/><br>
+                                    Location: <input type = "text" name="location" value = "100 W FAYETTE ST"/><br>
+                                    Weapon: <input type = "text" name = "weapon" value = "KNIFE"/><br>
+                                    Post: <input type = "text" name = "post" value = "112"/><br>
+                                    Neighborhood: <input type = "text" name = "neighborhood" value = "Downtown"/><br>
+                                    District: <input type = "text" name = "district" value = "CENTRAL"/><br>
+                                    Lat: <input type = "text" name ="latitude" value = "39.2903600000"/><br>
+                                    Long: <input type = "text" name ="longitude" value = "-76.6169500000"/><br>
                                     Race: <input type = "text" name ="race" value = "U"/><br>
                                     <input type="submit"/>
                                     </form>

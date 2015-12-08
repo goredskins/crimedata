@@ -10,7 +10,10 @@ echo "<select id = 'select-hood'>";
 $rows = array();
 while ($row = $res->fetch_assoc()) {
 	$value = $row['neighborhood'];
-	echo "<option value='$value'> $value </option>";
+	if($value == "Oldtown/Middle East") {	
+		echo "<option value='$value' selected> $value </option>";
+	}
+	else echo "<option value='$value'> $value </option>";
 }
 echo "</select>";
 //echo json_encode($rows);
