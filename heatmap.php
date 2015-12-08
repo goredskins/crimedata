@@ -157,7 +157,7 @@ else {
 			$.ajax({
                 type : 'post',
                 url : 'coordinates.php',  
-                data :  {limit: 5000},
+                data :  {limit: 6000},
                 success : function(r) {
                     //$("#latlong").html(r);
                     var obj = JSON.parse(r);
