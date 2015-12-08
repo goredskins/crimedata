@@ -128,7 +128,7 @@ else {
                 type : 'post',
                 url : 'loadTable.php',  
                 data :  {
-                    'query': 'SELECT * from crime_rates_2010 ORDER BY domvio DESC',
+                    'query': 'SELECT neighborhood, domvio, crime, viol, SUM(domvio + crime + viol) as aggregate FROM `crime_rates_2010` GROUP BY neighborhood ORDER BY SUM(domvio + crime + viol) DESC',
                     'table_name': 'crime_rates_2010'
                 },
                 success : function(r) {
