@@ -88,6 +88,9 @@ else {
                     <li>
                         <a href="heatmap.php"><i class="fa fa-fw fa-table"></i>Heat Map</a>
                     </li>
+                    <li>
+                        <a href="logout.php"><i class="fa fa-fw fa-table"></i>Logout</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -126,6 +129,7 @@ else {
                                     District: <input type = "text" name = "district"/><br>
                                     Lat: <input type = "text" name ="latitude" value = "39.3107200000"/><br>
                                     Long: <input type = "text" name ="longitude" value = "-76.708240000"/><br>
+                                    Race: <input type = "text" name ="race" value = "U"/><br>
                                     <input type="submit"/>
                                     </form>
                                  </div>

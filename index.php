@@ -79,6 +79,9 @@ else {
                     <li>
                         <a href="heatmap.php"><i class="fa fa-fw fa-table"></i>Heat Map</a>
                     </li>
+                    <li>
+                        <a href="logout.php"><i class="fa fa-fw fa-table"></i>Logout</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

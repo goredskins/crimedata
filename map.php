@@ -88,6 +88,9 @@ else {
                     <li>
                         <a href="heatmap.php"><i class="fa fa-fw fa-table"></i>Heat Map</a>
                     </li>
+                    <li>
+                        <a href="logout.php"><i class="fa fa-fw fa-table"></i>Logout</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -146,6 +149,9 @@ else {
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaI6XGo6lIsbV2FdQECz68XPjlOTUBA3I&libraries=visualization&amp;sensor=true"> </script>
     <script type="text/javascript">
     	var markers = [];
+    	var hospitalMarkers = [];
+    	var homelessMarkers = [];
+    	var courtMarkers = [];
 		function initialize() {
 	        var mapOptions = {
 	            center: new google.maps.LatLng(39.2959200000, -76.579310000),
@@ -169,7 +175,121 @@ else {
 					getCoordinates(map, dateString);
               }
             });
-		  	var image = 'images/crime.png';
+
+            $.ajax({
+                type : 'post',
+                url : 'coordinates.php',  
+                data :  {
+                	limit: 500,
+                	table: 'hospitals'
+                },
+                success : function(r) {
+                    //$("#latlong").html(r);
+                    var addresses = [];
+                    var obj = JSON.parse(r);
+                    console.debug(obj);
+                    for(var key in obj) {
+                    	// var image = {
+                    	// 	url: 'images/crime.png'
+                    	// };
+                    	addresses.push(obj[key]['location']);
+                    }
+                    console.debug(addresses);
+				  	var hospitalIcon = 'images/hospital.png';
+					for (var x = 0; x < addresses.length; x++) {
+				        $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address='+addresses[x]+'&sensor=false', null, function (data) {
+				            if(data.results.length > 0) {
+					            var p = data.results[0].geometry.location;
+					            var latlng = new google.maps.LatLng(p.lat, p.lng);
+					            console.debug(latlng);
+					            var hospitalMarker = new google.maps.Marker({
+					                position: latlng,
+					                map: map,
+					                icon: hospitalIcon,
+					            });
+					            hospitalMarkers.push(hospitalMarker);
+					        }
+				        });
+				    }
+                }
+            });
+
+     //        $.ajax({
+     //            type : 'post',
+     //            url : 'coordinates.php',  
+     //            data :  {
+     //            	limit: 500,
+     //            	table: 'courthouses'
+     //            },
+     //            success : function(r) {
+     //                //$("#latlong").html(r);
+     //                var addresses = [];
+     //                var obj = JSON.parse(r);
+     //                console.debug(obj);
+     //                for(var key in obj) {
+     //                	// var image = {
+     //                	// 	url: 'images/crime.png'
+     //                	// };
+     //                	addresses.push(obj[key]['location']);
+     //                }
+     //                console.debug(addresses);
+				 //  	var courthouseIcon = 'images/courthouse.png';
+					// for (var x = 0; x < addresses.length; x++) {
+				 //        $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address='+addresses[x]+'&sensor=false', null, function (data) {
+				 //            if(data.results.length > 0) {
+					//             var p = data.results[0].geometry.location;
+					//             var latlng = new google.maps.LatLng(p.lat, p.lng);
+					//             console.debug(latlng);
+					//             var courtMarker = new google.maps.Marker({
+					//                 position: latlng,
+					//                 map: map,
+					//                 icon: courthouseIcon,
+					//             });
+					//             courtMarkers.push(courtMarker);
+					//         }
+				 //        });
+				 //    }
+     //            }
+     //        });
+
+     //         $.ajax({
+     //            type : 'post',
+     //            url : 'coordinates.php',  
+     //            data :  {
+     //            	limit: 500,
+     //            	table: 'homeless_shelters'
+     //            },
+     //            success : function(r) {
+     //                //$("#latlong").html(r);
+     //                var addresses = [];
+     //                var obj = JSON.parse(r);
+     //                console.debug(obj);
+     //                for(var key in obj) {
+     //                	// var image = {
+     //                	// 	url: 'images/crime.png'
+     //                	// };
+     //                	addresses.push(obj[key]['location']);
+     //                }
+     //                console.debug(addresses);
+				 //  	var homelessIcon = 'images/homeless.png';
+					// for (var x = 0; x < addresses.length; x++) {
+				 //        $.getJSON('http://maps.googleapis.com/maps/api/geocode/json?address='+addresses[x]+'&sensor=false', null, function (data) {
+				 //            if(data.results.length > 0) {
+					//             var p = data.results[0].geometry.location;
+					//             var latlng = new google.maps.LatLng(p.lat, p.lng);
+					//             console.debug(latlng);
+					//             var homelessMarker = new google.maps.Marker({
+					//                 position: latlng,
+					//                 map: map,
+					//                 icon: homelessIcon,
+					//             });
+					//             homelessMarkers.push(homelessMarker);
+					//         }
+				 //        });
+				 //    }
+     //            }
+     //        });
+
 		}
 
 		function getCoordinates(map, dateString) {
@@ -196,7 +316,6 @@ else {
 					  	var marker = new google.maps.Marker({
 						    position: myLatLng,
 						    map: map,
-						    title: 'Hello World!',
 						    animation: google.maps.Animation.DROP,
 					  	});
 					  	markers.push(marker);
@@ -228,6 +347,8 @@ else {
 		  clearMarkers();
 		  markers = [];
 		}
+
+
     </script>
 </body>
 

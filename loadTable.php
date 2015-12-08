@@ -5,7 +5,14 @@ if(isset($_POST['certain_cols'])) {
 	$certain_cols = true;
 }
 $table = $_POST['table_name'];
-$res = $mysqli->query("SELECT * FROM $table LIMIT 1");
+$query_string_cols = "SELECT * from $table LIMIT 1";
+$query_string = "SELECT * FROM $table LIMIT 10";
+if(isset($_POST['query'])) {
+    $query_string_cols = $_POST['query']. " LIMIT 1";
+    echo $query_string_cols;
+    $query_string = $_POST['query'];
+}
+$res = $mysqli->query($query_string_cols);
 ?>
 <table class="table table-hover table-bordered table-striped" id="the_table">
 <?php
@@ -27,7 +34,6 @@ while ($property = mysqli_fetch_field($res)) {
     $column_count++;
 }
 print("</tr>\n");
-$query_string = "SELECT * FROM $table LIMIT 10";
 if($table == "crimes") {
     $query_string = "SELECT * FROM $table ORDER BY date_time DESC LIMIT 10";
 }

@@ -10,6 +10,7 @@ $neighborhood = $_POST['neighborhood'];
 $district = $_POST['district'];
 $latitude = $_POST['latitude'];
 $longitude = $_POST['longitude'];
+$race = $_POST['race'];
 
 $insert_query = "INSERT INTO crimes (date_time, crime_code, location, weapon, post, neighborhood, district, latitude, longitude) VALUES ('$date', '$crime_code', '$location', '$weapon', '$post', '$neighborhood', '$distict', $latitude, $longitude)";
 

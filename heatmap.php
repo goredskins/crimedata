@@ -19,7 +19,7 @@ else {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>NYC Crime Data Dashboard</title>
+    <title>Baltimore Crime Data Dashboard</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -85,6 +85,9 @@ else {
                     <li class="active">
                         <a href="heatmap.php"><i class="fa fa-fw fa-table"></i>Heat Map</a>
                     </li>
+                    <li>
+                        <a href="logout.php"><i class="fa fa-fw fa-table"></i>Logout</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -133,6 +136,7 @@ else {
     <script src="js/bootstrap.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaI6XGo6lIsbV2FdQECz68XPjlOTUBA3I&libraries=visualization&amp;sensor=true"> </script>
     <script type="text/javascript">
+    var markers = [];
 		function initialize() {
 	        var mapOptions = {
 	            center: new google.maps.LatLng(39.2959200000, -76.579310000),
@@ -157,7 +161,7 @@ else {
 			$.ajax({
                 type : 'post',
                 url : 'coordinates.php',  
-                data :  {limit: 6000},
+                data :  {limit: 200000},
                 success : function(r) {
                     //$("#latlong").html(r);
                     var obj = JSON.parse(r);
@@ -174,12 +178,33 @@ else {
 					    data: dataPoints,
 					    map: map
 					  });
-                	heatmap.set('opacity', 0.8);
+                	heatmap.set('opacity', 0.6);
 				}
             });
         }
 		google.maps.event.addDomListener(window, 'load', initialize);
+		// Sets the map on all markers in the array.
+		function setMapOnAll(map) {
+		  for (var i = 0; i < markers.length; i++) {
+		    markers[i].setMap(map);
+		  }
+		}
 
+		// Removes the markers from the map, but keeps them in the array.
+		function clearMarkers() {
+		  setMapOnAll(null);
+		}
+
+		// Shows any markers currently in the array.
+		function showMarkers() {
+		  setMapOnAll(map);
+		}
+
+		// Deletes all markers in the array by removing references to them.
+		function deleteMarkers() {
+		  clearMarkers();
+		  markers = [];
+		}
     </script>
 </body>
 
