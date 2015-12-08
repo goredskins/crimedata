@@ -65,10 +65,10 @@ else {
                     <li>
                         <a href="charts.php"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
                     </li>
-                    <li  class="active">
+                    <li>
                         <a href="tables.php"><i class="fa fa-fw fa-table"></i> Tables</a>
                     </li>
-                    <li>
+                    <li  class="active">
                         <a href="hoods.php"><i class="fa fa-fw fa-table"></i>Neighborhoods</a>
                     </li>
                     <li>
@@ -105,10 +105,6 @@ else {
                 <div class="row">
                     <div class="col-lg-12">
                         <div id = "the-dropdown">
-                            <select id="select_hood">
-                                <option type="text" value="derp"></option>
-                                <option type="text" value="derp"></option> 
-                            </select>
                         </div>
                     </div>
                 </div>
@@ -144,6 +140,12 @@ else {
                 },
                 success : function(r) {
                     $("#the-dropdown").html(r);
+                    var neighborhood = $("#select-hood").val();
+                    displayData(neighborhood);
+                    $("#select-hood").change(function (){
+                        displayData(this.value);
+                        //alert(dateString);
+                    });
                 }
             });
         }
@@ -163,10 +165,6 @@ else {
         }
         $(function(){
             populateDropdown();
-            var neighborhood = $("#the-dropdown").val();
-            displayData(neighborhood);
-            //displayData() selected neighborhood from dropdown
-
         });
     </script>
 

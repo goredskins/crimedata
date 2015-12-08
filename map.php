@@ -80,6 +80,9 @@ else {
                         <a href="tables.php"><i class="fa fa-fw fa-table"></i> Tables</a>
                     </li>
                     <li>
+                        <a href="hoods.php"><i class="fa fa-fw fa-table"></i>Neighborhoods</a>
+                    </li>
+                    <li>
                         <a href="reportcrime.php"><i class="fa fa-fw fa-table"></i>Report Crime</a>
                     </li>
                     <li class="active">

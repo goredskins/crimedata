@@ -6,7 +6,7 @@ $query_string = "SELECT neighborhood from crime_rates_2010";
 $res = $mysqli->query($query_string);
 $res->data_seek(0);
 //echo json_encode($res->fetch_assoc());
-echo "<select id = 'dropdown'>";
+echo "<select id = 'select-hood'>";
 $rows = array();
 while ($row = $res->fetch_assoc()) {
 	$value = $row['neighborhood'];

@@ -72,6 +72,9 @@ else {
                         <a href="tables.php"><i class="fa fa-fw fa-table"></i> Tables</a>
                     </li>
                     <li>
+                        <a href="hoods.php"><i class="fa fa-fw fa-table"></i>Neighborhoods</a>
+                    </li>
+                    <li>
                         <a href="reportcrime.php"><i class="fa fa-fw fa-table"></i>Report Crime</a>
                     </li>
                     <li>
@@ -103,20 +106,6 @@ else {
                 <!-- /.row -->
 
                 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="panel panel-green">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Area Line Graph Example with Tooltips</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div id="morris-area-chart"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.row -->
-
-                <div class="row">
                     <div class="col-lg-4">
                         <div class="panel panel-yellow">
                             <div class="panel-heading">
@@ -130,26 +119,13 @@ else {
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-8">
                         <div class="panel panel-red">
                             <div class="panel-heading">
                                 <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Line Graph Example with Tooltips</h3>
                             </div>
                             <div class="panel-body">
                                 <div id="morris-line-chart"></div>
-                                <div class="text-right">
-                                    <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Bar Graph Example</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div id="morris-bar-chart"></div>
                                 <div class="text-right">
                                     <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
                                 </div>
