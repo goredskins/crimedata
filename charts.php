@@ -109,26 +109,20 @@ else {
                     <div class="col-lg-4">
                         <div class="panel panel-yellow">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Donut Chart Example</h3>
+                                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Racial Breakdown of Crimes</h3>
                             </div>
                             <div class="panel-body">
                                 <div id="morris-donut-chart"></div>
-                                <div class="text-right">
-                                    <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-8">
                         <div class="panel panel-red">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Line Graph Example with Tooltips</h3>
+                                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> Crimes by Date</h3>
                             </div>
                             <div class="panel-body">
                                 <div id="morris-line-chart"></div>
-                                <div class="text-right">
-                                    <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
                             </div>
                         </div>
                     </div>

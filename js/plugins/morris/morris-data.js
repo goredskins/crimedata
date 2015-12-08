@@ -2,34 +2,30 @@
 
 $(function() {
     // Donut Chart
-    Morris.Donut({
-        element: 'morris-donut-chart',
-        data: [{
-            label: "Black",
-            value: 120
-        }, {
-            label: "White",
-            value: 30
-        }, {
-            label: "Undetermined",
-            value: 20
-        }, {
-            label: "Asian",
-            value: 30
-        }, {
-            label: "American Indian",
-            value: 20
-        }],
-        resize: true
+    $.ajax({
+        type : 'post',
+        url : 'chartdata.php',  
+        data :  {
+            chart_type: 'pi'
+        },
+        success : function(r) {
+            //$("#latlong").html(r);
+            var obj = JSON.parse(r);
+            //console.debug(obj);
+            var chartData = [];
+            for(var key in obj) {
+                chartData.push({label: obj[key]['description'], value: parseInt(obj[key]['crimes'])});
+            }
+            console.debug(chartData);
+            Morris.Donut({
+                element: 'morris-donut-chart',
+                data: chartData,
+                resize: true
+            });
+        }
     });
-
     // Line Chart
-    Morris.Line({
-        // ID of the element in which to draw the chart.
-        element: 'morris-line-chart',
-        // Chart data records -- each entry in this array corresponds to a point on
-        // the chart.
-        data: [{
+chartData = [{
             d: '2012-10-01',
             visits: 802
         }, {
@@ -122,18 +118,40 @@ $(function() {
         }, {
             d: '2012-10-31',
             visits: 1892
-        }, ],
-        // The name of the data record attribute that contains x-visitss.
-        xkey: 'd',
-        // A list of names of data record attributes that contain y-visitss.
-        ykeys: ['visits'],
-        // Labels for the ykeys -- will be displayed when you hover over the
-        // chart.
-        labels: ['Visits'],
-        // Disables line smoothing
-        smooth: false,
-        resize: true
+        }, ];
+        console.debug(chartData);
+    $.ajax({
+        type : 'post',
+        url : 'chartdata.php',  
+        data :  {
+            chart_type: 'line'
+        },
+        success : function(r) {
+            //$("#latlong").html(r);
+            var obj = JSON.parse(r);
+            //console.debug(obj);
+            var chartData = [];
+            for(var key in obj) {
+                chartData.push({d: obj[key]['y'] + "-" + obj[key]['m'] + "-" + obj[key]['d'], crimes: parseInt(obj[key]['crimes'])});
+            }
+            console.debug(chartData);
+            Morris.Line({
+                // ID of the element in which to draw the chart.
+                element: 'morris-line-chart',
+                // Chart data records -- each entry in this array corresponds to a point on
+                // the chart.
+                data: chartData,
+                // The name of the data record attribute that contains x-visitss.
+                xkey: 'd',
+                // A list of names of data record attributes that contain y-visitss.
+                ykeys: ['crimes'],
+                // Labels for the ykeys -- will be displayed when you hover over the
+                // chart.
+                labels: ['Crimes'],
+                // Disables line smoothing
+                smooth: false,
+                resize: true
+            });
+        }
     });
-
-
 });
