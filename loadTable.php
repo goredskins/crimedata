@@ -27,8 +27,11 @@ while ($property = mysqli_fetch_field($res)) {
     $column_count++;
 }
 print("</tr>\n");
-
-$res = $mysqli->query("SELECT * FROM $table LIMIT 10");
+$query_string = "SELECT * FROM $table LIMIT 10";
+if($table == "crimes") {
+    $query_string = "SELECT * FROM $table ORDER BY date_time DESC LIMIT 10";
+}
+$res = $mysqli->query($query_string);
 $res->data_seek(0);
 while ($row = $res->fetch_assoc()) {
 	echo "<tr>";

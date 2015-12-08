@@ -9,7 +9,7 @@ else {
     $username = $_SESSION['username'];
 }
 ?>
-<!DOCTYPE html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 <!DOCTYPE html>
+<!DOCTYPE html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 <html lang="en">
 
 <head>
@@ -65,7 +65,7 @@ else {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Baltimore Crime Data</a>
+                <a class="navbar-brand" href="index.php">Baltimore Crime Data</a>
             </div>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -80,7 +80,7 @@ else {
                         <a href="tables.php"><i class="fa fa-fw fa-table"></i> Tables</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-table"></i>Report Crime</a>
+                        <a href="reportcrime.php"><i class="fa fa-fw fa-table"></i>Report Crime</a>
                     </li>
                     <li class="active">
                         <a href="map.php"><i class="fa fa-fw fa-table"></i>Map of Crimes by Date</a>

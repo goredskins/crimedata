@@ -1,4 +1,4 @@
-<?php
+ <?php
 // Check if session is not registered, redirect back to main page. 
 // Put this code in first line of web page. 
 session_start();
@@ -9,8 +9,9 @@ else {
     $username = $_SESSION['username'];
 }
 ?>
-<!DOCTYPE html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+<!DOCTYPE html>                        
 <html lang="en">
+
 <head>
 
     <meta charset="utf-8">
@@ -19,7 +20,7 @@ else {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>NYC Crime Data Dashboard</title>
+    <title>Report Crime</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -33,6 +34,8 @@ else {
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -40,12 +43,12 @@ else {
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style>
-		#map-canvas {
-		  width: 100%;
-		  height: 400px;
-		  margin-bottom: 15px;
-		  border: 2px solid #fff;
-		}
+        #map-canvas {
+          width: 100%;
+          height: 400px;
+          margin-bottom: 15px;
+          border: 2px solid #fff;
+        }
     </style>
 </head>
 <body>
@@ -62,7 +65,7 @@ else {
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">NYC Crime Data</a>
+                <a class="navbar-brand" href="index.php">Baltimore Crime Data</a>
             </div>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -76,13 +79,13 @@ else {
                     <li>
                         <a href="tables.php"><i class="fa fa-fw fa-table"></i> Tables</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="reportcrime.php"><i class="fa fa-fw fa-table"></i>Report Crime</a>
                     </li>
                     <li>
                         <a href="map.php"><i class="fa fa-fw fa-table"></i>Map of Crimes by Date</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="heatmap.php"><i class="fa fa-fw fa-table"></i>Heat Map</a>
                     </li>
                 </ul>
@@ -98,7 +101,7 @@ else {
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                           Heat Map
+                            Report a Crime
                         </h1>
                     </div>
                 </div>
@@ -109,17 +112,27 @@ else {
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Heat Map </h3>
+                                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Report Crime</h3>
                             </div>
                             <div class="panel-body">
-                                 <div id="map-canvas"></div>
-                                 <div id="latlong"></div>
+                                 <div id="form-content">
+                                    <form action = "addcrime.php" method = "post"><br>
+                                    Date: <input type = "text" name = "date" value = "2015-12-08"/><br>
+                                    Crime Code: <input type = "text" name="crime_code" value = "1F"/><br>
+                                    Location: <input type = "text" name="location"/><br>
+                                    Weapon: <input type = "text" name = "weapon"/><br>
+                                    Post: <input type = "text" name = "post"/><br>
+                                    Neighborhood: <input type = "text" name = "neighborhood"/><br>
+                                    District: <input type = "text" name = "district"/><br>
+                                    Lat: <input type = "text" name ="latitude" value = "39.3107200000"/><br>
+                                    Long: <input type = "text" name ="longitude" value = "-76.708240000"/><br>
+                                    <input type="submit"/>
+                                    </form>
+                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            <!-- /.container-fluid -->
-
         </div>
         <!-- /#page-wrapper -->
 
@@ -131,54 +144,9 @@ else {
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaI6XGo6lIsbV2FdQECz68XPjlOTUBA3I&libraries=visualization&amp;sensor=true"> </script>
-    <script type="text/javascript">
-		function initialize() {
-	        var mapOptions = {
-	            center: new google.maps.LatLng(39.2959200000, -76.579310000),
-	            zoom: 11,
-	            scrollwheel: false,
-	            draggable: true,
-	            panControl: true,
-	            zoomControl: true,
-	            mapTypeControl: true,
-	            scaleControl: true,
-	            streetViewControl: true,
-	            overviewMapControl: true,
-	            rotateControl: true,
-	        };
-			var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);		  
-			makeHeatMap(map);
-		}
-		function makeHeatMap(map) {
-			//ajax call
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
-			//on success
-			$.ajax({
-                type : 'post',
-                url : 'coordinates.php',  
-                data :  {limit: 6000},
-                success : function(r) {
-                    //$("#latlong").html(r);
-                    var obj = JSON.parse(r);
-                    console.debug(obj);
-                    var dataPoints = [];
-                    for(var key in obj) {
-                    	//console.debug(key);
-                    	//console.debug(obj[key]);
-                    	//parseFloat(obj[key]['latitude']);
-						dataPoints.push(new google.maps.LatLng(parseFloat(obj[key]['latitude']), parseFloat(obj[key]['longitude'])));
-                    }
-                    console.debug(dataPoints);
-                	var heatmap = new google.maps.visualization.HeatmapLayer({
-					    data: dataPoints,
-					    map: map
-					  });
-                	heatmap.set('opacity', 0.8);
-				}
-            });
-        }
-		google.maps.event.addDomListener(window, 'load', initialize);
+    <script type="text/javascript">
 
     </script>
 </body>
