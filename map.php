@@ -261,7 +261,7 @@ else {
 		}
 
 		function getCoordinates(map, dateStr) {
-			$(".page-header").html("Map of Crimes on " + dateString);
+			$(".page-header").html("Map of Crimes on " + dateStr);
 			deleteMarkers();
 			var dateTypeVar = $('#datepicker').datepicker('getDate');
 			var dateString = $.datepicker.formatDate('yy-mm-dd', dateTypeVar);
